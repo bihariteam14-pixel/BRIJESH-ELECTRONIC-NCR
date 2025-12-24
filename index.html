@@ -56,24 +56,26 @@
         .full-btn { width: 100%; padding: 12px; border: none; border-radius: 5px; font-weight: bold; margin-top: 10px; color: white; cursor: pointer;}
         .inp { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
 
-        /* MUSIC */
-        #musicResults { max-height: 200px; overflow-y: auto; margin-top: 10px; border: 1px solid #eee; }
-        .song-item { display: flex; align-items: center; padding: 8px; border-bottom: 1px solid #eee; cursor: pointer; }
-        .song-item img { width: 40px; height: 40px; border-radius: 4px; margin-right: 10px; }
+        /* BOTTOM NAV */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #ddd; display: flex; justify-content: space-around; padding: 12px 0; z-index: 4000; }
+        .nav-icon { font-size: 22px; color: #666; cursor: pointer; }
+        .nav-icon.active { color: #1a237e; }
 
         /* STORY VIEWER */
         #storyViewer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 6000; flex-direction: column; }
         .progress-container { width: 98%; height: 3px; background: #555; margin: 5px auto; border-radius: 2px; display: flex; }
         .progress-bar { height: 100%; background: white; width: 0%; }
         .sv-header { display: flex; align-items: center; padding: 10px; gap: 10px; color: white; position: absolute; top: 20px; width: 100%; z-index: 2; }
-
-        /* BOTTOM NAV */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #ddd; display: flex; justify-content: space-around; padding: 12px 0; z-index: 4000; }
-        .nav-icon { font-size: 22px; color: #666; cursor: pointer; }
-        .nav-icon.active { color: #1a237e; }
+        
+        /* TRACKING CARD STYLE */
+        .track-card { background: #e3f2fd; padding: 15px; border-radius: 8px; border-left: 5px solid #1a237e; margin-top: 10px; text-align: left;}
     </style>
 </head>
 <body>
+
+    <audio id="orderSound">
+      <source src="https://assets.mixkit.co/sfx/preview/mixkit-bell-notification-933.mp3">
+    </audio>
 
     <div class="site-header">
         <h1 id="appTitle">Brijesh Electronic</h1>
@@ -87,11 +89,11 @@
                 <div class="shop-details">
                     <h2>📺 TV Repair Service</h2>
                     <ul class="problem-list">
-                        <li>Screen Tooti Ya Line Aa Rahi Hai</li>
-                        <li>TV Bilkul On Nahi Ho Raha Hai</li>
-                        <li>Aawaaz Aa Rahi Hai Par Picture Nahi Hai</li>
-                        <li>Bar-Bar Apne Aap Band Ho Jata Hai</li>
-                        <li>HDMI/USB Port Kaam Nahi Kar Raha Hai</li>
+                        <li>Screen Tooti / Line</li>
+                        <li>TV Bilkul On Nahi Ho Raha</li>
+                        <li>Sound Hai Par Picture Nahi</li>
+                        <li>Auto On / Off Problem</li>
+                        <li>HDMI / USB Port Issue</li>
                     </ul>
                     <button class="shop-btn" onclick="openOrder('TV Repair')">Order Now</button>
                 </div>
@@ -101,11 +103,11 @@
                 <div class="shop-details">
                     <h2>🧺 Washing Machine Repair</h2>
                     <ul class="problem-list">
-                        <li>Kapde Dry (Spin) Nahi Ho Rahe Hain</li>
-                        <li>Motor Bilkul Nahi Chal Rahi Hai</li>
-                        <li>Paani Drain (Nikal) Nahi Ho Raha Hai</li>
-                        <li>Bahut Zyaada Aawaaz Karti Hai</li>
-                        <li>Door Ya Lock Kaam Nahi Kar Raha Hai</li>
+                        <li>No Spin / Kapde Nahi Sukh Rahe</li>
+                        <li>Motor Dead / Nahi Chal Rahi</li>
+                        <li>Water Drain Problem</li>
+                        <li>Bahut Zyaada Aawaaz</li>
+                        <li>Door Lock Problem</li>
                     </ul>
                     <button class="shop-btn" onclick="openOrder('Washing Machine')">Order Now</button>
                 </div>
@@ -115,11 +117,11 @@
                 <div class="shop-details">
                     <h2>📡 Dish/DTH Service</h2>
                     <ul class="problem-list">
-                        <li>Naya Dish Antenna Lagwana Hai</li>
-                        <li>Signal Nahi Aa Raha</li>
-                        <li>Antenna Hawa Se Hil Gaya Hai</li>
-                        <li>LNB Ya Wire Badlav Ki Zaroorat Hai</li>
-                        <li>Setup Box Mein Channel Nahi Aa Rahe Hain</li>
+                        <li>Signal Issue / No Signal</li>
+                        <li>New Fitting / Fitting Change</li>
+                        <li>Wire Cut / Connector Problem</li>
+                        <li>LNB Problem</li>
+                        <li>Setup Box No Channel</li>
                     </ul>
                     <button class="shop-btn" onclick="openOrder('Dish Antenna')">Order Now</button>
                 </div>
@@ -129,11 +131,11 @@
                 <div class="shop-details">
                     <h2>🔌 Cable Fixing</h2>
                     <ul class="problem-list">
-                        <li>Naye TV mein Data Cable Lagwana Hai</li>
-                        <li>TV Aur Setup Box Ko Connect Karna Hai</li>
-                        <li>TV Picture/Sound Saaf Nahi Aa Raha Hai</li>
-                        <li>Purani Cable Ya Connector Badlav Ki Zaroorat Hai</li>
-                        <li>Setup Box On Nahi Ho Raha Hai</li>
+                        <li>Setup Box Issue</li>
+                        <li>Wire Problem / New Wire</li>
+                        <li>Connector Damage</li>
+                        <li>Port Loose / Audio Video Issue</li>
+                        <li>New Connectivity</li>
                     </ul>
                     <button class="shop-btn" onclick="openOrder('Cable Fixing')">Order Now</button>
                 </div>
@@ -155,13 +157,20 @@
         <div id="feedContainer"></div>
     </div>
 
+    <div id="trackView" class="page-section" style="text-align:center;">
+        <h2>📦 Track Your Order</h2>
+        <input type="text" id="trackIdInp" class="inp" placeholder="Enter Order ID (e.g. ORD173...)">
+        <button class="full-btn" style="background:#1a237e;" onclick="trackMyOrder()">Track Status</button>
+        <div id="trackResult"></div>
+    </div>
+
     <div id="adminView" class="page-section">
         <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h2>🔑 Admin Orders</h2>
+            <h2>🔑 Admin Orders Panel</h2>
             <i class="fas fa-times-circle" style="color:red; font-size:30px; cursor:pointer;" onclick="switchTab('shop')"></i>
         </div>
         <div id="orderList"></div>
-        <button onclick="localStorage.removeItem('orders'); loadAdmin();" style="width:100%; margin-top:20px; background:red; color:white; padding:10px; border:none;">Clear All</button>
+        <button onclick="localStorage.removeItem('orders'); loadAdmin();" style="width:100%; margin-top:20px; background:red; color:white; padding:10px; border:none; border-radius:5px;">Clear All History</button>
     </div>
 
     <div id="profileView" class="page-section" style="text-align:center;">
@@ -179,15 +188,30 @@
 
     <div class="bottom-nav">
         <i class="fas fa-store nav-icon active" id="navShop" onclick="switchTab('shop')"></i>
+        <i class="fas fa-search-location nav-icon" id="navTrack" onclick="switchTab('track')"></i>
         <i class="fas fa-users nav-icon" id="navSocial" onclick="switchTab('social')"></i>
         <i class="fas fa-user-circle nav-icon" id="navProfile" onclick="switchTab('profile')"></i>
     </div>
 
     <div id="mainMenu" class="dropdown-menu">
-        <a onclick="switchTab('shop')">🏠 Shop</a>
-        <a onclick="switchTab('social')">👥 Social</a>
-        <a onclick="switchTab('profile')">👤 Profile</a>
-        <a onclick="checkAdmin()">🔑 Admin Panel</a>
+        <a onclick="switchTab('shop')">🏠 Shop Home</a>
+        <a onclick="switchTab('track')">📦 Track Order</a>
+        <a onclick="switchTab('social')">👥 Social Feed</a>
+        <a onclick="switchTab('profile')">👤 My Profile</a>
+        <a onclick="checkAdmin()" id="adminMenuLink">🔑 Admin Panel</a>
+    </div>
+
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('orderModal')">&times;</span>
+            <h3 id="orderTitle">Booking</h3>
+            <label>Select Problem:</label>
+            <select id="problemSelect" class="inp"></select>
+            <input type="text" id="orderName" class="inp" placeholder="Your Name">
+            <input type="tel" id="orderPhone" class="inp" placeholder="WhatsApp Number">
+            <textarea id="orderAddr" class="inp" placeholder="Full Address"></textarea>
+            <button class="full-btn" style="background:#28a745;" onclick="confirmOrder()">Confirm Order (COD)</button>
+        </div>
     </div>
 
     <div id="storyUploadModal" class="modal">
@@ -195,9 +219,9 @@
             <span class="close-btn" onclick="closeModal('storyUploadModal')">&times;</span>
             <h3>Add Story</h3>
             <input type="file" id="storyFile" accept="image/*" onchange="previewStory(this)">
-            <input type="text" id="musicQuery" class="inp" placeholder="Search Song...">
+            <input type="text" id="musicQuery" class="inp" placeholder="Search Music...">
             <button class="full-btn" style="background:#1a237e;" onclick="searchMusic()">Search Music</button>
-            <div id="musicResults"></div>
+            <div id="musicResults" style="max-height:150px; overflow-y:auto; border:1px solid #eee; margin-top:5px;"></div>
             <button class="full-btn" style="background:#1877F2;" onclick="publishStory()">Share Story</button>
         </div>
     </div>
@@ -206,22 +230,10 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('postModal')">&times;</span>
             <h3>Create Post</h3>
-            <textarea id="pText" class="inp" style="height:80px;" placeholder="What's up?"></textarea>
+            <textarea id="pText" class="inp" style="height:80px;" placeholder="What's on your mind?"></textarea>
             <input type="file" id="pFile" accept="image/*,video/*" onchange="previewPost(this)">
             <div id="pPreview"></div>
-            <button class="full-btn" style="background:#1877F2;" onclick="publishPost()">Post</button>
-        </div>
-    </div>
-
-    <div id="orderModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('orderModal')">&times;</span>
-            <h3 id="orderTitle">Booking</h3>
-            <select id="problemSelect" class="inp"></select>
-            <input type="text" id="orderName" class="inp" placeholder="Name">
-            <input type="tel" id="orderPhone" class="inp" placeholder="Phone">
-            <textarea id="orderAddr" class="inp" placeholder="Address"></textarea>
-            <button class="full-btn" style="background:#28a745;" onclick="confirmOrder()">Confirm</button>
+            <button class="full-btn" style="background:#1877F2;" onclick="publishPost()">Post Now</button>
         </div>
     </div>
 
@@ -237,26 +249,217 @@
     </div>
 
     <script>
+        // --- CONFIG ---
+        const ADMIN_WHATSAPP = "918920017674"; 
         let userData = JSON.parse(localStorage.getItem('user_data')) || { name: "Guest", pic: "https://via.placeholder.com/150" };
         let stories = JSON.parse(localStorage.getItem('stories') || '[]');
         let posts = JSON.parse(localStorage.getItem('posts') || '[]');
+        let currentSvc = "";
         let mediaBuffer, selectedSong, timer;
 
         const probsDB = {
-            'TV Repair': ['Screen Line','Dead','No Sound','HDMI Issue'],
-            'Washing Machine': ['No Spin','Motor Dead','Water Leak','Noise'],
-            'Dish Antenna': ['Signal Issue','New Fitting','Wire Cut'],
-            'Cable Fixing': ['Setup Box Issue','Wire Problem','No Signal']
+            'TV Repair': ['Screen Tooti / Line', 'TV Bilkul On Nahi Ho Raha', 'Sound Hai Par Picture Nahi', 'Auto On / Off Problem', 'HDMI / USB Port Issue'],
+            'Washing Machine': ['No Spin', 'Motor Dead', 'Water Drain Problem', 'Noise Issue', 'Door Lock Problem'],
+            'Dish Antenna': ['Signal Issue', 'New Fitting', 'Wire Cut', 'LNB Problem', 'No Channel'],
+            'Cable Fixing': ['Setup Box Issue', 'Wire Problem', 'No Signal', 'Connector Damage', 'Port Loose']
         };
 
-        window.onload = () => { applyUser(); loadStories(); loadPosts(); };
+        window.onload = () => { 
+            applyUser(); 
+            loadStories(); 
+            loadPosts(); 
+        };
 
+        function playNotif() {
+            document.getElementById("orderSound").play().catch(()=>{});
+        }
+
+        // --- CORE ---
         function applyUser() {
             document.querySelectorAll('.global-pic').forEach(img => img.src = userData.pic);
             document.getElementById('profileNameDisplay').innerText = userData.name;
         }
 
-        // --- PROFILE FUNCTIONS ---
+        function saveUser() { 
+            localStorage.setItem('user_data', JSON.stringify(userData)); 
+            applyUser(); 
+        }
+
+        function switchTab(id) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-icon').forEach(n => n.classList.remove('active'));
+            document.getElementById(id+'View').classList.add('active');
+            let navBtn = document.getElementById('nav' + id.charAt(0).toUpperCase() + id.slice(1));
+            if(navBtn) navBtn.classList.add('active');
+            document.getElementById('mainMenu').classList.remove('show');
+        }
+
+        function toggleMenu() { document.getElementById('mainMenu').classList.toggle('show'); }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        // --- SHOP & ORDERS ---
+        function openOrder(svc) {
+            currentSvc = svc; 
+            document.getElementById('orderTitle').innerText = svc;
+            let sel = document.getElementById('problemSelect'); 
+            sel.innerHTML = "";
+            (probsDB[svc] || ['Other Issue']).forEach(p => {
+                sel.innerHTML += `<option value="${p}">${p}</option>`;
+            });
+            openModal('orderModal');
+        }
+
+        function confirmOrder() {
+            let name = document.getElementById('orderName').value;
+            let phone = document.getElementById('orderPhone').value;
+            let addr = document.getElementById('orderAddr').value;
+            let prob = document.getElementById('problemSelect').value;
+            if(!name || !phone || !addr) return alert("Sari jankari bharein!");
+
+            let orderId = "ORD" + Date.now();
+            let orderObj = { 
+                id: orderId,
+                svc: currentSvc, 
+                problem: prob, 
+                name: name, 
+                phone: phone, 
+                addr: addr, 
+                status: "Pending",
+                date: new Date().toLocaleString() 
+            };
+            
+            let orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            orders.push(orderObj);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            playNotif();
+
+            let msg = `*NEW SERVICE ORDER*%0A*ID:* ${orderId}%0A*Service:* ${orderObj.svc}%0A*Problem:* ${orderObj.problem}%0A*Customer:* ${orderObj.name}%0A*Phone:* ${orderObj.phone}%0A*Address:* ${orderObj.addr}`;
+            window.location.href = `https://wa.me/${ADMIN_WHATSAPP}?text=${msg}`;
+
+            closeModal('orderModal');
+            alert("Order Placed! Your ID: " + orderId);
+        }
+
+        // --- TRACKING ---
+        function trackMyOrder() {
+            let id = document.getElementById('trackIdInp').value.trim();
+            let orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            let o = orders.find(x => x.id === id);
+            let res = document.getElementById('trackResult');
+            
+            if(o) {
+                res.innerHTML = `
+                <div class="track-card">
+                    <b>Status: <span style="color:blue">${o.status}</span></b><br>
+                    Service: ${o.svc}<br>
+                    Problem: ${o.problem}<br>
+                    Date: ${o.date}
+                </div>`;
+            } else {
+                res.innerHTML = "<p style='color:red; margin-top:10px;'>Order ID nahi mili!</p>";
+            }
+        }
+
+        // --- ADMIN ---
+        function checkAdmin() {
+            let p = prompt("Admin Password Dalein:");
+            if (p === "1234") {
+                loadAdmin();
+                switchTab('admin');
+            } else {
+                alert("Wrong Password!");
+            }
+        }
+
+        function loadAdmin() {
+            let orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            let list = document.getElementById('orderList');
+            if(orders.length === 0) {
+                list.innerHTML = "<p style='text-align:center;'>Abhi koi order nahi hai.</p>";
+                return;
+            }
+            list.innerHTML = orders.map((o, i) => `
+                <div style="background:white; padding:10px; border-bottom:2px solid #eee; margin-bottom:5px; border-radius:5px;">
+                    <b style="color:#1a237e;">ID: ${o.id}</b><br>
+                    <b>${o.svc}</b> - ${o.problem}<br>
+                    <b>Cust:</b> ${o.name} (${o.phone})<br>
+                    <b>Status:</b> 
+                    <select onchange="updateOrderStatus(${i}, this.value)" style="width:auto; display:inline; padding:2px;">
+                        <option ${o.status=="Pending"?"selected":""}>Pending</option>
+                        <option ${o.status=="In Progress"?"selected":""}>In Progress</option>
+                        <option ${o.status=="Completed"?"selected":""}>Completed</option>
+                    </select>
+                </div>
+            `).join('');
+        }
+
+        function updateOrderStatus(index, newStatus) {
+            let orders = JSON.parse(localStorage.getItem('orders'));
+            orders[index].status = newStatus;
+            localStorage.setItem('orders', JSON.stringify(orders));
+            playNotif();
+            alert("Status Updated to " + newStatus);
+        }
+
+        // --- SOCIAL FUNCTIONS ---
+        function previewStory(i) { 
+            let r = new FileReader(); 
+            r.onload = e => mediaBuffer = e.target.result; 
+            r.readAsDataURL(i.files[0]); 
+        }
+
+        function publishStory() {
+            if(!mediaBuffer) return;
+            stories.unshift({ img: mediaBuffer, music: selectedSong, user: userData.name });
+            localStorage.setItem('stories', JSON.stringify(stories));
+            closeModal('storyUploadModal'); 
+            loadStories();
+        }
+
+        function loadStories() {
+            let tray = document.getElementById('storyTray');
+            tray.innerHTML = `<div class="story-item story-add" onclick="openModal('storyUploadModal')"><i class="fas fa-plus-circle"></i></div>` + 
+            stories.map((s,i) => `<div class="story-item" onclick="viewStory(${i})"><img src="${s.img}"><p>${s.user}</p></div>`).join('');
+        }
+
+        function viewStory(i) {
+            let s = stories[i];
+            document.getElementById('storyViewer').style.display = 'flex';
+            document.getElementById('viewImg').src = s.img;
+            document.getElementById('svUser').innerText = s.user;
+            let bar = document.getElementById('storyProgress');
+            let w = 0;
+            clearInterval(timer);
+            timer = setInterval(() => { w++; bar.style.width = w + '%'; if(w >= 100) closeViewer(); }, 50);
+        }
+
+        function closeViewer() { document.getElementById('storyViewer').style.display = 'none'; clearInterval(timer); }
+
+        function previewPost(i) { 
+            let r = new FileReader(); 
+            r.onload = e => mediaBuffer = e.target.result;
+            r.readAsDataURL(i.files[0]); 
+        }
+
+        function publishPost() {
+            let txt = document.getElementById('pText').value;
+            posts.unshift({ user: userData.name, pic: userData.pic, text: txt, img: mediaBuffer });
+            localStorage.setItem('posts', JSON.stringify(posts));
+            closeModal('postModal'); 
+            loadPosts();
+        }
+
+        function loadPosts() {
+            document.getElementById('feedContainer').innerHTML = posts.map(p => `
+                <div class="post-card">
+                    <div class="post-header"><img src="${p.pic}" class="user-dp"><b>${p.user}</b></div>
+                    <div style="padding:10px;">${p.text}</div>
+                    ${p.img ? `<img src="${p.img}" class="post-media">` : ''}
+                </div>
+            `).join('');
+        }
+
         function changePic(input) {
             if(input.files[0]) {
                 let r = new FileReader();
@@ -266,77 +469,7 @@
         }
         function saveName() {
             let n = document.getElementById('nameInp').value;
-            if(n) { userData.name = n; saveUser(); alert("Name Saved!"); }
-        }
-        function saveUser() { localStorage.setItem('user_data', JSON.stringify(userData)); applyUser(); }
-
-        // --- NAVIGATION ---
-        function switchTab(id) {
-            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-icon').forEach(n => n.classList.remove('active'));
-            document.getElementById(id+'View').classList.add('active');
-            if(document.getElementById('nav'+id.charAt(0).toUpperCase()+id.slice(1)))
-                document.getElementById('nav'+id.charAt(0).toUpperCase()+id.slice(1)).classList.add('active');
-            document.getElementById('mainMenu').classList.remove('show');
-        }
-        function toggleMenu() { document.getElementById('mainMenu').classList.toggle('show'); }
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-        // --- SHOP & ADMIN ---
-        function openOrder(svc) {
-            currentSvc = svc; document.getElementById('orderTitle').innerText = svc;
-            let sel = document.getElementById('problemSelect'); sel.innerHTML = "";
-            (probsDB[svc] || ['Other']).forEach(p => sel.innerHTML += `<option>${p}</option>`);
-            openModal('orderModal');
-        }
-        function confirmOrder() {
-            let o = { svc: currentSvc, name: document.getElementById('orderName').value, phone: document.getElementById('orderPhone').value, addr: document.getElementById('orderAddr').value, date: new Date().toLocaleString() };
-            let orders = JSON.parse(localStorage.getItem('orders') || '[]');
-            orders.push(o); localStorage.setItem('orders', JSON.stringify(orders));
-            closeModal('orderModal'); alert("Order Success!");
-        }
-        function checkAdmin() { if(prompt("Pass:")==="12345") { loadAdmin(); switchTab('admin'); } else alert("Wrong!"); }
-        function loadAdmin() {
-            let orders = JSON.parse(localStorage.getItem('orders') || '[]');
-            document.getElementById('orderList').innerHTML = orders.map(o => `<div style="padding:10px; border-bottom:1px solid #ccc;"><b>${o.svc}</b> - ${o.name} (${o.phone})</div>`).join('') || "No Orders";
-        }
-
-        // --- SOCIAL ---
-        async function searchMusic() {
-            let q = document.getElementById('musicQuery').value;
-            let res = await fetch(`https://itunes.apple.com/search?term=${q}&limit=5`);
-            let data = await res.json();
-            document.getElementById('musicResults').innerHTML = data.results.map(s => `<div class="song-item" onclick="selectedSong='${s.previewUrl}'; alert('Song Selected')"><img src="${s.artworkUrl60}"> ${s.trackName}</div>`).join('');
-        }
-        function previewStory(i) { let r = new FileReader(); r.onload = e => mediaBuffer = e.target.result; r.readAsDataURL(i.files[0]); }
-        function publishStory() {
-            stories.unshift({ img: mediaBuffer, music: selectedSong, user: userData.name });
-            localStorage.setItem('stories', JSON.stringify(stories));
-            closeModal('storyUploadModal'); loadStories();
-        }
-        function loadStories() {
-            let tray = document.getElementById('storyTray');
-            tray.innerHTML = `<div class="story-item story-add" onclick="openModal('storyUploadModal')"><i class="fas fa-plus-circle"></i></div>` + 
-            stories.map((s,i) => `<div class="story-item" onclick="viewStory(${i})"><img src="${s.img}"><p>${s.user}</p></div>`).join('');
-        }
-        function viewStory(i) {
-            let s = stories[i]; document.getElementById('storyViewer').style.display = 'flex';
-            document.getElementById('viewImg').src = s.img; document.getElementById('svUser').innerText = s.user;
-            let a = document.getElementById('viewAudio'); if(s.music) { a.src=s.music; a.play(); }
-            let bar = document.getElementById('storyProgress'); let w=0;
-            timer = setInterval(() => { w++; bar.style.width=w+'%'; if(w>=100) closeViewer(); }, 50);
-        }
-        function closeViewer() { document.getElementById('storyViewer').style.display='none'; document.getElementById('viewAudio').pause(); clearInterval(timer); }
-
-        function previewPost(i) { let r = new FileReader(); r.onload = e => mediaBuffer = e.target.result; r.readAsDataURL(i.files[0]); }
-        function publishPost() {
-            posts.unshift({ user: userData.name, pic: userData.pic, text: document.getElementById('pText').value, img: mediaBuffer });
-            localStorage.setItem('posts', JSON.stringify(posts));
-            closeModal('postModal'); loadPosts();
-        }
-        function loadPosts() {
-            document.getElementById('feedContainer').innerHTML = posts.map(p => `<div class="post-card"><div class="post-header"><img src="${p.pic}" class="user-dp"><b>${p.user}</b></div><div style="padding:10px;">${p.text}</div>${p.img ? `<img src="${p.img}" class="post-media">` : ''}</div>`).join('');
+            if(n) { userData.name = n; saveUser(); alert("Name Updated!"); }
         }
     </script>
 </body>
